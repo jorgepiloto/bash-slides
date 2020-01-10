@@ -1,0 +1,23 @@
+
+Description = "vim volk"
+
+Default	= { Colour="#ffffff" }
+Canvas	= { Colour="#005c70" }
+Number	= { Colour="#ffa500" }
+Escape	= { Colour="#ffd074" }
+String	= { Colour="#33ff33" }
+BlockComment	= { Colour="#ff33ff" }
+StringPreProc = String
+LineComment   = BlockComment
+Operator      = { Colour="#ffffff"}
+LineNum      = { Colour="ffff00"}
+PreProcessor      = Default
+Interpolation  = { Colour="#9F9FF2" }
+
+Keywords = {
+  { Colour="#ff0000" },
+  { Colour="#5b92ff" },
+  { Colour="#7f7fff" },
+  { Colour="#3333ff" },
+}
+

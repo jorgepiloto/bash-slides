@@ -5,7 +5,7 @@
 #
 # Inspired by https://github.com/fxn/tkn
 
-CODE_STYLE="breeze"
+CODE_STYLE="google-dark"
 SECTION_DECORATION=" ❧❦☙ "
 LEN_DECORATION="${#SECTION_DECORATION}"
 
@@ -21,6 +21,7 @@ FORMATTING=(
     "<Y>" "$( tput setaf 226 )"
     "<V>" "$( tput setaf 129 )"
     "<E>" "$( tput setaf 248 )"
+    "<W>" "$( tput setaf 255 )"
 )
 NR_FORMATTING="${#FORMATTING[@]}"
 for (( i = 0; i < NR_FORMATTING; i += 2 )); do
@@ -178,9 +179,17 @@ show_slide() {
         done
         filler=$(( (columns - longest + 1) / 2 ))  # Add 1 to round up
 
+	WHITE='\033[1;37m'
         for (( i = 0; i < length; i++ )); do
+	    begin_line="${formatted_lines[i]:23:3}"
             printf "%${filler}s" " "
-            echo -e "${formatted_lines[i]}"
+	    if [[ "$begin_line" == ">>>" ]]; then
+		# If Python output syntax, remove highlight
+		no_color_line="$( sed -r "s/\x1B(\[[0-9;]*[JKmsu]|\(B)//g" <<< "${formatted_lines[i]}" )"
+	        echo -e "${WHITE}$no_color_line"
+	    else
+                echo -e "${formatted_lines[i]}"
+	    fi
         done
 
     # Section slide type
